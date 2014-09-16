@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{A Rack-based Web Framework}
   spec.description   = %q{A Rack-based Web Framework,
                           but with extra awesome.}
-  spec.homepage      = ""
+  spec.homepage      = "http://ifyouseewendy.com"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
@@ -20,9 +20,10 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.5"
-  spec.add_development_dependency "rake"
+  spec.add_development_dependency "rake", '~> 0'
 
-  spec.add_runtime_dependency "rack"
-  spec.add_development_dependency "rack-test"
-  spec.add_development_dependency "test-unit"
+  spec.add_runtime_dependency "rack", '~> 1.5'
+  spec.add_development_dependency "rack-test", '~> 0'
+  spec.add_development_dependency "test-unit", '~> 0'
+
 end
