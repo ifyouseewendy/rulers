@@ -18,14 +18,14 @@ class RulersAppTest < Test::Unit::TestCase
     assert body['Hello']
   end
 
-  # def test_to_underscore
-  #   word = 'Rulers::HttpController'
-  #   assert_equal 'rulers/http_controller', word.to_underscore
+  def test_to_underscore
+    word = 'Rulers::HttpController'
+    assert_equal 'rulers/http_controller', Rulers.to_underscore(word)
 
-  #   word = 'Ruler::HTTPController'
-  #   assert_equal 'rulers/http_controller', word.to_underscore
+    word = 'Rulers::HTTPController'
+    assert_equal 'rulers/http_controller', Rulers.to_underscore(word)
 
-  #   word = 'Ruler::H4Controller'
-  #   assert_equal 'rulers/http_controller', word.to_underscore
-  # end
+    word = 'Rulers::H4Controller'
+    assert_equal 'rulers/h4_controller', Rulers.to_underscore(word)
+  end
 end

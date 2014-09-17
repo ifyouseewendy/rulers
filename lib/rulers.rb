@@ -1,6 +1,7 @@
 require "rulers/version"
 require 'rulers/array'
 require 'rulers/routes'
+require 'rulers/util'
 
 module Rulers
   class Application
