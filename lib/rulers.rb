@@ -11,11 +11,13 @@ module Rulers
         if Object.const_defined?('HomeController')
           text = Object.const_get('HomeController').new(env).send('index')
           return [200, {'Content-Type' => 'text/html'}, [text]]
-        elsif File.exist?( f=File.join( env['ROOT_DIR'], 'public', 'index.html') )
+        elsif File.exist?( f=File.join( env['ROOT_DIR'].to_s, 'public', 'index.html') )
           return [200, {'Content-Type' => 'text/html'}, [File.read(f)]]
         else
           return [303, {'Location' => '/quotes/a_quote'}, []]
         end
+      elsif env['PATH_INFO'] == '/test'
+        return [200, {'Content-Type' => 'text/html'}, ['Hello world']]
       end
 
       begin
