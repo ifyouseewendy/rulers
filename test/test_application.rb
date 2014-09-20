@@ -37,4 +37,29 @@ class RulersAppTest < Test::Unit::TestCase
     word = 'Rulers::H4Controller'
     assert_equal 'rulers/h4_controller', Rulers.to_underscore(word)
   end
+
+  def test_file_model
+    test_file = File.expand_path("../../db/quotes/9999.json", __FILE__)
+    begin
+      assert_nil Rulers::Model::FileModel.find(9999)
+
+      File.open(test_file, 'w') do |f|
+        f.puts <<-HERE
+          {
+            "name": "wendi",
+            "age": "25"
+          }
+        HERE
+      end
+
+      fm = Rulers::Model::FileModel.new(test_file)
+      assert_equal 'wendi', fm['name']
+      fm['gender'] = 'male'
+      assert_equal 'male', fm['gender']
+
+      assert !Rulers::Model::FileModel.find(9999).nil?
+    ensure
+      File.delete test_file
+    end
+  end
 end
