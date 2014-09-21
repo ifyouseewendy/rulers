@@ -1,4 +1,5 @@
 require_relative 'file_model'
+require 'rack/request'
 
 module Rulers
   class Controller
@@ -22,5 +23,27 @@ module Rulers
       klass = self.class.to_s.gsub(/Controller$/, '')
       Rulers.to_underscore klass
     end
+
+    def request
+      @request ||= Rack::Request.new(env)
+    end
+
+    def params
+      request.params
+    end
+
+    def response(text, status = 200, headers = {})
+      raise "Already responded!" if @response
+      @response = Rack::Response.new([text].flatten, status, headers)
+    end
+
+    def get_response
+      @response
+    end
+
+    def render_response(*args)
+      response render(*args)
+    end
+
   end
 end
