@@ -26,6 +26,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "erubis", '~> 2.7'
   spec.add_runtime_dependency "multi_json", '~> 1.10'
   spec.add_runtime_dependency "pry-byebug", '~> 1.3.2'
+  spec.add_runtime_dependency "sqlite3", '~> 1.3.8'
   spec.add_development_dependency "rack-test", '~> 0.6'
   spec.add_development_dependency "test-unit", '~> 3.0'
 
