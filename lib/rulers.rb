@@ -1,10 +1,10 @@
 require "rulers/version"
 require 'rulers/array'
-require 'rulers/routes'
 require 'rulers/util'
 require 'rulers/dependencies'
 require 'rulers/controller'
 require 'rulers/file_model'
+require 'rulers/routing'
 require 'pry'
 
 module Rulers
