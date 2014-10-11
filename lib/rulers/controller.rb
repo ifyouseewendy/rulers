@@ -11,12 +11,40 @@ module Rulers
       @routing_params = {}
     end
 
+    def get_response
+      @response
+    end
+
+    def render_response(*args)
+      response render(*args)
+    end
+
+
+    def self.action(act, p = {})
+      proc {|e| self.new(e).dispatch(act, p) }
+    end
     def env
       @env
     end
 
-    def self.action(act, p = {})
-      proc {|e| self.new(e).dispatch(act, p) }
+    def params
+      request.params.merge @routing_params
+    end
+    def request
+      @request ||= Rack::Request.new(env)
+    end
+
+
+    def controller_name
+      klass = self.class.to_s.gsub(/Controller$/, '')
+      Rulers.to_underscore klass
+    end
+
+
+
+    def response(text, status = 200, headers = {})
+      raise "Already responded!" if @response
+      @response = Rack::Response.new([text].flatten, status, headers)
     end
 
     def dispatch(action, routing_params = {})
@@ -34,31 +62,6 @@ module Rulers
       Rulers::View.new(filename, ivars, locals).result
     end
 
-    def controller_name
-      klass = self.class.to_s.gsub(/Controller$/, '')
-      Rulers.to_underscore klass
-    end
-
-    def request
-      @request ||= Rack::Request.new(env)
-    end
-
-    def params
-      request.params.merge @routing_params
-    end
-
-    def response(text, status = 200, headers = {})
-      raise "Already responded!" if @response
-      @response = Rack::Response.new([text].flatten, status, headers)
-    end
-
-    def get_response
-      @response
-    end
-
-    def render_response(*args)
-      response render(*args)
-    end
 
   end
 end
